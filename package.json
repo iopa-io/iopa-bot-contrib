@@ -1,0 +1,25 @@
+{
+    "name": "mono-repository-for-iopa-bot-contrib",
+    "private": true,
+    "version": "3.0.0",
+    "description": "Iopa capabilities often used in iopa-bot",
+    "author": "iopa <build@iopa.io>",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/iopa-io/iopa-bot-contrib.git"
+    },
+    "dependencies": {},
+    "keywords": [
+        "iopa-bot",
+        "IOPA"
+    ],
+    "engines": {},
+    "scripts": {
+        "build": "lerna run build"
+    },
+    "homepage": "https://iopa.io",
+    "workspaces": [
+        "packages/*"
+    ]
+}

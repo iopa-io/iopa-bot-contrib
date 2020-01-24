@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "declaration": true,
+    "lib": ["webworker"],
+    "target": "es2019",
+    "module": "esnext",
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "sourceMap": true,
+    "incremental": true,
+    "moduleResolution": "node",
+    "forceConsistentCasingInFileNames": true,
+    "allowSyntheticDefaultImports": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noImplicitAny": false,
+    "strictNullChecks": false,
+    "suppressImplicitAnyIndexErrors": true,
+    "noUnusedLocals": false,
+    "esModuleInterop": false,
+    "isolatedModules": false,
+    "resolveJsonModule": true,
+    "downlevelIteration": true,
+    "stripInternal": true,
+    "removeComments": true
+  },
+  "exclude": ["node_modules"],
+  "include": ["src"]
+}

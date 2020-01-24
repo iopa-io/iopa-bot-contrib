@@ -1,0 +1,27 @@
+{
+  "name": "iopa-bot-contrib-messages",
+  "version": "1.0.0",
+  "description": "Simple Bot Message Store",
+  "main": "dist/index.js",
+  "types": "src/index.ts",
+  "ts:main": "src/index.ts",
+  "author": "Guy Barnard",
+  "contributors": [
+    "Guy Barnard",
+    "Internet of Protococols Alliance"
+  ],
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/iopa-io/iopa-bot-contrib.git"
+  },
+  "scripts": {
+    "build": "tsc",
+    "format": "prettier --ignore-path ../../.gitignore --write '**/*.{js,jsx,ts,tsx,json,md}'"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}
