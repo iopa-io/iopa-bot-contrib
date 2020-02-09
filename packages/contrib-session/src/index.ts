@@ -1,1 +1,2 @@
-export { SessionMiddleware as Session } from "./session";
+/* eslint-disable import/prefer-default-export */
+export { default as Session } from './session'

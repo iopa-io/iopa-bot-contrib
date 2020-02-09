@@ -1,2 +1,2 @@
-export { MessageStoreMemory } from "./messages-memory";
-export { MessageStoreSession } from "./messages-session";
+export { default as MessageStoreMemory } from './messages-memory'
+export { default as MessageStoreSession } from './messages-session'
