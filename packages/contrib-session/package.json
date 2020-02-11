@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "Simple Bot Session Store",
   "main": "dist/index.js",
-  "types": "src/index.ts",
   "ts:main": "src/index.ts",
+  "types": "src/index.ts",
   "author": "Guy Barnard",
   "contributors": [
     "Guy Barnard",
@@ -22,6 +22,9 @@
     "build": "tsc",
     "format": "prettier --ignore-path ../../.gitignore --write '**/*.{js,jsx,ts,tsx,json,md}'"
   },
-  "dependencies": {},
-  "devDependencies": {}
+  "dependencies": {
+    "iopa-types": "^3.0.0"
+  },
+  "devDependencies": {},
+  "peerDependencies": {}
 }
