@@ -80,7 +80,6 @@ export default class MessageStoreMemory implements IMessageStore {
 
   protected async store_(item: BotReadingLegacy): Promise<IopaBotReading> {
     item.key = item.key || this.seq++
-    // item = JSON.parse(JSON.stringify(item));
     const iopaItem = MessageStoreMemory.convertFromLegacy(item)
     iopaItem.get('bot.MetaData').isClosed = false
     this.items.push(iopaItem)
@@ -131,11 +130,11 @@ export default class MessageStoreMemory implements IMessageStore {
   static convertFromLegacy(base: BotReadingLegacy): IopaBotReading {
     const item = new IopaMap<BotReadingLegacy>(base) as IopaBotReadingLegacy
 
-    item.set(
-      'bot.Text',
-      item.get('bot.Text') || item.get('urn:consumer:message:text')
-    )
-    item.delete('urn:consumer:message:text')
+    const text = item.get('bot.Text') || item.get('urn:consumer:message:text')
+    if (text) {
+      item.set('bot.Text', text)
+      item.delete('urn:consumer:message:text')
+    }
 
     item.set(
       'bot.Source',

@@ -121,12 +121,10 @@ export default class MessageStoreSession extends MessageStoreMemory
   }
 
   public async clear() {
-    await this.app.capability('urn:io.iopa.database:session').clear()
-    await this.app.capability('urn:consumer:profile').save()
-
     this.items.splice(0)
     this.seq = 1
     this.emit('state', this)
-    return Promise.resolve()
+    await this.app.capability('urn:io.iopa.database:session').clear()
+    await this.app.capability('urn:consumer:profile').save()
   }
 }
