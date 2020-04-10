@@ -58,7 +58,7 @@ export default class MessageStoreSession extends MessageStoreMemory
       .capability('urn:io.iopa.database:session')
       .get('message-utterances')
 
-    if (utterances) {
+    if (utterances && Object.keys(utterances).length > 0) {
       this._utterances = utterances
     }
 
