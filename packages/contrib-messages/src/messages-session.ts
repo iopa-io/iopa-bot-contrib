@@ -96,7 +96,7 @@ export default class MessageStoreSession extends MessageStoreMemory
     this.emit('state', this)
   }
 
-  removeCard = async (key: number) => {
+  async removeCard(key: number) {
     const itemIndex = this.items.findIndex(item => item.key === key)
     await this.app
       .capability('urn:io.iopa.database:session')
