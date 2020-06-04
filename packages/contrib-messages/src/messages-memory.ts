@@ -42,7 +42,7 @@ export default class MessageStoreMemory implements IMessageStore {
     }
     const item: IopaBotReading =
       !key || key === 0
-        ? this.items.find(itemfind => itemfind.key === key)
+        ? this.items.find((itemfind) => itemfind.key === key)
         : this.items[this.items.length - 1]
 
     if (item) {
@@ -52,7 +52,7 @@ export default class MessageStoreMemory implements IMessageStore {
   }
 
   public async removeCard(key: number) {
-    const itemIndex = this.items.findIndex(item => item.key === key)
+    const itemIndex = this.items.findIndex((item) => item.key === key)
     this.items.splice(itemIndex, 1)
     this.emit('state', this)
   }
