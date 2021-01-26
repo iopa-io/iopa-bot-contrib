@@ -1,12 +1,12 @@
 /* eslint-disable class-methods-use-this */
-import { ISessionDatabase } from 'iopa-types'
+import { App, ISessionDatabase } from 'iopa-types'
 
 export default class SessionMiddleware implements ISessionDatabase {
-  'iopa.Version' = '3.0'
+  'iopa.Version': string = '3.0'
 
   isReady: Promise<void>
 
-  constructor(app) {
+  constructor(app: App<any, any>) {
     if (app.capability('urn:io.iopa.database:session')) {
       throw new Error('Session Database already registered for this app')
     }

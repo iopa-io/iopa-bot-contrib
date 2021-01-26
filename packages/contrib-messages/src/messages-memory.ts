@@ -7,7 +7,7 @@ import {
 import { IopaMap } from 'iopa'
 
 export default class MessageStoreMemory implements IMessageStore {
-  ['iopa.Version'] = '3.0'
+  ['iopa.Version']: string = '3.0'
 
   public items: IopaBotReading[]
 
@@ -15,7 +15,7 @@ export default class MessageStoreMemory implements IMessageStore {
 
   protected events: { [key: string]: any[] }
 
-  protected seq = 1
+  protected seq: number = 1
 
   isReady: Promise<void>
 
@@ -78,6 +78,7 @@ export default class MessageStoreMemory implements IMessageStore {
     this.emit('typingIndicatorOff')
   }
 
+  // eslint-disable-next-line @typescript-eslint/naming-convention
   protected async store_(item: BotReadingLegacy): Promise<IopaBotReading> {
     item.key = item.key || this.seq++
     const iopaItem = MessageStoreMemory.convertFromLegacy(item)
@@ -128,7 +129,9 @@ export default class MessageStoreMemory implements IMessageStore {
   }
 
   static convertFromLegacy(base: BotReadingLegacy): IopaBotReading {
-    const item = new IopaMap<BotReadingLegacy>(base) as IopaBotReadingLegacy
+    const item = (new IopaMap<BotReadingLegacy>(
+      base
+    ) as unknown) as IopaBotReadingLegacy
 
     const text = item.get('bot.Text') || item.get('urn:consumer:message:text')
     if (text) {
@@ -191,7 +194,9 @@ export default class MessageStoreMemory implements IMessageStore {
   }
 
   static convertToLegacy(iopaItem: IopaBotReading): BotReadingLegacy {
-    const item = new IopaMap(iopaItem.toJSON()) as IopaBotReadingLegacy
+    const item = (new IopaMap(
+      iopaItem.toJSON()
+    ) as unknown) as IopaBotReadingLegacy
 
     item.set(
       'urn:consumer:message:text',

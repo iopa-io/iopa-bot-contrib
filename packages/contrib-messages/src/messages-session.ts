@@ -18,15 +18,16 @@ export interface Dependencies {
   'urn:consumer:profile': IConsumerProfile
 }
 
-export default class MessageStoreSession extends MessageStoreMemory
+export default class MessageStoreSession
+  extends MessageStoreMemory
   implements IMessageStore {
-  ['iopa.Version'] = '3.0'
+  ['iopa.Version']: string = '3.0'
 
-  app: App<Dependencies>
+  app: App<{}, Dependencies>
 
   isReady: Promise<void>
 
-  constructor(app: App<Dependencies>) {
+  constructor(app: App<{}, Dependencies>) {
     super()
     this.app = app
     app.setCapability('urn:io.iopa.bot:messages', this)
@@ -42,10 +43,10 @@ export default class MessageStoreSession extends MessageStoreMemory
 
     await Promise.all(
       keys
-        .filter(key => key.startsWith('message_'))
-        .map(key => parseInt(key.replace(/^message_/, '')))
+        .filter((key) => key.startsWith('message_'))
+        .map((key) => parseInt(key.replace(/^message_/, '')))
         .sort((a, b) => a - b)
-        .map(async key => {
+        .map(async (key) => {
           const item = await this.app
             .capability('urn:io.iopa.database:session')
             .get(`message_${key}`)
@@ -70,7 +71,7 @@ export default class MessageStoreSession extends MessageStoreMemory
   }
 
   public set utterances(utterances: string[]) {
-    this.app
+    void this.app
       .capability('urn:io.iopa.database:session')
       .put(`message-utterances`, utterances)
     this._utterances = utterances
@@ -83,7 +84,7 @@ export default class MessageStoreSession extends MessageStoreMemory
     }
     const item =
       !key || key === 0
-        ? this.items.find(finditem => finditem.key === key)
+        ? this.items.find((finditem) => finditem.key === key)
         : this.items[this.items.length - 1]
 
     if (item) {
@@ -97,13 +98,14 @@ export default class MessageStoreSession extends MessageStoreMemory
   }
 
   async removeCard(key: number) {
-    const itemIndex = this.items.findIndex(item => item.key === key)
+    const itemIndex = this.items.findIndex((item) => item.key === key)
     await this.app
       .capability('urn:io.iopa.database:session')
       .delete(`message_${itemIndex}`)
-    super.removeCard(key)
+    await super.removeCard(key)
   }
 
+  // eslint-disable-next-line @typescript-eslint/naming-convention
   protected async store_(item: BotReadingLegacy): Promise<IopaBotReading> {
     item.key = item.key || this.seq++
     // item = JSON.parse(JSON.stringify(item));
